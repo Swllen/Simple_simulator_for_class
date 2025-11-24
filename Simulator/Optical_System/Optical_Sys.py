@@ -32,6 +32,8 @@ Thie version of Oprical System has the following features:
 5. You can change the pinhole 1 size after the optical system is initialized by calling set_pinhole_size(enlarge=True/False) function.
 
 For the pinhole aperture, only R_min<r<R_max can pass ligtht, others will be blocked.
+
+If you want to get a valid sys, you must caculate the correct positions of mirror 1 and mirror 2, you can use the funcs in 'helper.py' to calculate.
 """
 
 
@@ -43,7 +45,7 @@ class OpticalSystem(Optic):
                  pinhole_aperture: list = [0.5, 0.0],
                  detector_aperture: list = [2.0, 2.0],
                  mirror1_position: np.ndarray = np.array([0, 0, 100.0]),
-                 mirror2_position: np.ndarray = np.array([0, -100, 100.0]),
+                 mirror2_position: np.ndarray = np.array([0, -100.0, 100.0]),
                  rotation_angles_mirror1: np.ndarray = np.array([np.pi/2+np.pi/4, 0.0, 0.0]),  # [rx1, ry1, rz1]
                  rotation_angles_mirror2: np.ndarray = np.array([np.pi/4, 0.0, 0.0]),  # [rx2, ry2, rz2]
                  pinhole_dist: float = 100.0,
@@ -58,10 +60,10 @@ class OpticalSystem(Optic):
         detector_aperture : list [x_size, y_size], default [2.0, 2.0] Rectangular detector size along x and y directions (in mm).
         beam_size : float, default 1.0  Diameter of the incident beam (in mm).
         wavelength : float, default 0.78 Wavelength of the incoming light (in µm).
-        mirror1_position : np.ndarray, default [0, 0, 10.0] Position of the first mirror in Cartesian coordinates [x, y, z].
-        mirror2_position : np.ndarray, default [0, 0, 10.0] Position of the first mirror in Cartesian coordinates [x, y, z].
-        rotation_angles_mirror1 : np.ndarray, default [45.0, 0.0, 0.0] Rotation angles [rx, ry, rz] of the first mirror in degrees.
-        rotation_angles_mirror2 : np.ndarray, default [45.0, 0.0, 0.0] Rotation angles [rx, ry, rz] of the second mirror in degrees.
+        mirror1_position : np.ndarray, default [0, 0, 100.0] Position of the first mirror in Cartesian coordinates [x, y, z].
+        mirror2_position : np.ndarray, default [0, -100, 100.0] Position of the first mirror in Cartesian coordinates [x, y, z].
+        rotation_angles_mirror1 : np.ndarray, default [135.0, 0.0, 0.0] Rotation angles [rx, ry, rz] of the first mirror in degrees.
+        rotation_angles_mirror2 : np.ndarray, default [-45.0, 0.0, 0.0] Rotation angles [rx, ry, rz] of the second mirror in degrees.
         pinhole_dist : float, default 100.0 Distance between pinhole 1 and pinhole 2 (in mm).
         m2_a1_dist : float, default 20.0 Distance between mirror 2 and pinhole 1 (in mm).
         """
@@ -313,4 +315,5 @@ class OpticalSystem(Optic):
             self.surface_group.surfaces[7].aperture.r_max=self.pinhole_aperture[0]
         else:
             self.surface_group.surfaces[6].aperture.r_max=self.pinhole_max_size
+
             self.surface_group.surfaces[7].aperture.r_max=self.pinhole_max_size
