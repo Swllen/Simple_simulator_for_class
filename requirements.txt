@@ -1,0 +1,14 @@
+# Core simulation and math
+optiland==0.5.6
+numpy
+torch
+
+# Visualization
+matplotlib
+vtk
+
+# Experiment logging (optional)
+wandb
+
+# Notebooks and dev utilities (optional)
+jupyter
