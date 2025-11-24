@@ -24,5 +24,5 @@ pip install numpy matplotlib vtk wandb
 - Top-level notebook show usage examples.
 
 ## Contact 
-If you have any question or there are any bugs, please contanct swllen25@gmail.com
+If you have any question or there are any bugs, please contanct swllen25@gmail.com or create an issue.
 
